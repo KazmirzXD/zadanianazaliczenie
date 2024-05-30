@@ -4,19 +4,30 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Podaj liczbę: ");
 
-        // Wczytanie liczby od użytkownika
-        double liczba = scanner.nextDouble();
+        // Pobieranie trzech liczb od użytkownika
+        System.out.print("Podaj pierwszą liczbę: ");
+        double liczba1 = scanner.nextDouble();
 
-        // Sprawdzenie, czy liczba jest dodatnia, ujemna czy zero
-        if (liczba > 0) {
-            System.out.println("Liczba jest dodatnia.");
-        } else if (liczba < 0) {
-            System.out.println("Liczba jest ujemna.");
-        } else {
-            System.out.println("Liczba jest zerem.");
+        System.out.print("Podaj drugą liczbę: ");
+        double liczba2 = scanner.nextDouble();
+
+        System.out.print("Podaj trzecią liczbę: ");
+        double liczba3 = scanner.nextDouble();
+
+        // Znalezienie największej liczby
+        double najwieksza = liczba1;
+
+        if (liczba2 > najwieksza) {
+            najwieksza = liczba2;
         }
+
+        if (liczba3 > najwieksza) {
+            najwieksza = liczba3;
+        }
+
+        // Wypisanie największej liczby
+        System.out.println("Największa liczba to: " + najwieksza);
 
         scanner.close();
     }
