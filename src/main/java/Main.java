@@ -5,58 +5,34 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Pobieranie równania od użytkownika
-        System.out.print("Podaj równanie w postaci 'ax + b = c': ");
-        String rownanie = scanner.nextLine();
+        // Pobieranie współczynników równania kwadratowego od użytkownika
+        System.out.println("Podaj współczynniki równania kwadratowego ax^2 + bx + c = 0:");
+        System.out.print("a: ");
+        double a = scanner.nextDouble();
+        System.out.print("b: ");
+        double b = scanner.nextDouble();
+        System.out.print("c: ");
+        double c = scanner.nextDouble();
 
-        // Usunięcie białych znaków z równania
-        rownanie = rownanie.replaceAll("\\s", "");
+        // Obliczanie delta
+        double delta = b * b - 4 * a * c;
 
-        // Sprawdzanie, czy równanie jest liniowe
-        boolean czyLiniowe = czyRownanieLiniowe(rownanie);
-
-        // Wyświetlanie wyniku
-        if (czyLiniowe) {
-            System.out.println("Podane równanie jest równaniem liniowym.");
+        // Sprawdzanie rodzaju pierwiastków
+        if (delta > 0) {
+            double pierwiastekDelta = Math.sqrt(delta);
+            double x1 = (-b + pierwiastekDelta) / (2 * a);
+            double x2 = (-b - pierwiastekDelta) / (2 * a);
+            System.out.println("Równanie ma dwa pierwiastki rzeczywiste:");
+            System.out.println("x1 = " + x1);
+            System.out.println("x2 = " + x2);
+        } else if (delta == 0) {
+            double x = -b / (2 * a);
+            System.out.println("Równanie ma jeden podwójny pierwiastek rzeczywisty:");
+            System.out.println("x = " + x);
         } else {
-            System.out.println("Podane równanie nie jest równaniem liniowym.");
+            System.out.println("Równanie nie ma pierwiastków rzeczywistych.");
         }
 
         scanner.close();
-    }
-
-    // Metoda do sprawdzania czy równanie jest równaniem liniowym
-    public static boolean czyRownanieLiniowe(String rownanie) {
-        // Sprawdzenie czy równanie zawiera 'x'
-        if (!rownanie.contains("x")) {
-            return false;
-        }
-
-        // Podział równania na lewą i prawą stronę
-        String[] strony = rownanie.split("=");
-
-        // Sprawdzenie, czy obie strony zawierają 'x'
-        if (strony.length != 2 || strony[0].indexOf('x') == -1 || strony[1].indexOf('x') == -1) {
-            return false;
-        }
-
-        // Podział lewej strony na 'ax' i 'b'
-        String[] lewaStrona = strony[0].split("x");
-
-        // Sprawdzenie czy 'ax' jest liczbą
-        try {
-            Double.parseDouble(lewaStrona[0]);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-
-        // Sprawdzenie czy 'b' jest liczbą
-        try {
-            Double.parseDouble(lewaStrona[1]);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-
-        return true;
     }
 }
