@@ -1,23 +1,30 @@
-import java.util.Random;
+            import java.util.Scanner;
 
-public class Main {
+            public class Main {
 
-    public static void main(String[] args) {
-        Random random = new Random();
+                // Metoda sprawdzająca, czy rok jest przestępny
+                public static boolean czyRokPrzestepny(int rok) {
+                    if ((rok % 4 == 0 && rok % 100 != 0) || (rok % 400 == 0)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
 
-        // Losowanie liczby oczek dla pierwszej kostki
-        int kostka1 = random.nextInt(6) + 1; // Zwraca liczbę od 1 do 6
-        // Losowanie liczby oczek dla drugiej kostki
-        int kostka2 = random.nextInt(6) + 1; // Zwraca liczbę od 1 do 6
+                public static void main(String[] args) {
+                    Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Wynik rzutu pierwszą kostką: " + kostka1);
-        System.out.println("Wynik rzutu drugą kostką: " + kostka2);
+                    // Pobieranie roku od użytkownika
+                    System.out.print("Podaj rok: ");
+                    int rok = scanner.nextInt();
 
-        // Porównanie wyników
-        if (kostka1 == kostka2) {
-            System.out.println("Wygrana! Obie kostki mają taką samą liczbę oczek.");
-        } else {
-            System.out.println("Przegrana. Kostki mają różne liczby oczek.");
-        }
-    }
-}
+                    // Sprawdzanie, czy rok jest przestępny
+                    if (czyRokPrzestepny(rok)) {
+                        System.out.println("Rok " + rok + " jest rokiem przestępnym.");
+                    } else {
+                        System.out.println("Rok " + rok + " nie jest rokiem przestępnym.");
+                    }
+
+                    scanner.close();
+                }
+            }
