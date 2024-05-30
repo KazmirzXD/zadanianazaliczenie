@@ -1,32 +1,23 @@
-import java.util.Scanner;
+import java.util.Random;
 
 public class Main {
 
-    // Metoda sprawdzająca, czy słowo jest palindromem
-    public static boolean czyPalindrom(String slowo) {
-        int dlugosc = slowo.length();
-        for (int i = 0; i < dlugosc / 2; i++) {
-            if (slowo.charAt(i) != slowo.charAt(dlugosc - 1 - i)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
 
-        // Pobieranie słowa od użytkownika
-        System.out.print("Podaj słowo: ");
-        String slowo = scanner.nextLine();
+        // Losowanie liczby oczek dla pierwszej kostki
+        int kostka1 = random.nextInt(6) + 1; // Zwraca liczbę od 1 do 6
+        // Losowanie liczby oczek dla drugiej kostki
+        int kostka2 = random.nextInt(6) + 1; // Zwraca liczbę od 1 do 6
 
-        // Sprawdzanie, czy słowo jest palindromem
-        if (czyPalindrom(slowo)) {
-            System.out.println("Słowo " + slowo + " jest palindromem.");
+        System.out.println("Wynik rzutu pierwszą kostką: " + kostka1);
+        System.out.println("Wynik rzutu drugą kostką: " + kostka2);
+
+        // Porównanie wyników
+        if (kostka1 == kostka2) {
+            System.out.println("Wygrana! Obie kostki mają taką samą liczbę oczek.");
         } else {
-            System.out.println("Słowo " + slowo + " nie jest palindromem.");
+            System.out.println("Przegrana. Kostki mają różne liczby oczek.");
         }
-
-        scanner.close();
     }
 }
