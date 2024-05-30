@@ -1,38 +1,32 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
-    // Metoda sprawdzająca płeć na podstawie numeru PESEL
-    public static String okreslPlec(String pesel) {
-        // Sprawdzanie, czy PESEL ma długość 11 znaków
-        if (pesel.length() != 11) {
-            return "Nieprawidłowy numer PESEL.";
-        }
-
-        // Pobieranie 10-tego znaku z PESEL-u, który określa płeć
-        char znakPlec = pesel.charAt(9);
-
-        // Konwertowanie znaku na cyfrę
-        int cyfraPlec = Character.getNumericValue(znakPlec);
-
-        // Określanie płci na podstawie cyfry: parzysta - kobieta, nieparzysta - mężczyzna
-        if (cyfraPlec % 2 == 0) {
-            return "Płeć: Kobieta";
-        } else {
-            return "Płeć: Mężczyzna";
-        }
-    }
-
     public static void main(String[] args) {
+        Random random = new Random();
         Scanner scanner = new Scanner(System.in);
 
-        // Pobieranie numeru PESEL od użytkownika
-        System.out.print("Podaj numer PESEL: ");
-        String pesel = scanner.nextLine();
+        // Losowanie liczby od 0 do 100
+        int wylosowanaLiczba = random.nextInt(101); // nextInt(101) generuje liczby od 0 do 100
 
-        // Określanie płci na podstawie PESEL-u
-        String plec = okreslPlec(pesel);
-        System.out.println(plec);
+        System.out.println("Zgadnij liczbę od 0 do 100:");
+
+        int zgadywanaLiczba = -1; // Inicjalizujemy zmienną wartością spoza zakresu, aby wejść do pętli
+
+        // Pętla do-while pozwalająca zgadywać, aż użytkownik poda poprawną liczbę
+        do {
+            System.out.print("Podaj swoją liczbę: ");
+            zgadywanaLiczba = scanner.nextInt();
+
+            if (zgadywanaLiczba < wylosowanaLiczba) {
+                System.out.println("Podana liczba jest za mała.");
+            } else if (zgadywanaLiczba > wylosowanaLiczba) {
+                System.out.println("Podana liczba jest za duża.");
+            } else {
+                System.out.println("Gratulacje! Zgadłeś liczbę.");
+            }
+        } while (zgadywanaLiczba != wylosowanaLiczba);
 
         scanner.close();
     }
