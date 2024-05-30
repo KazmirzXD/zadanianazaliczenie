@@ -1,42 +1,62 @@
-    import java.util.Arrays;
-    import java.util.Scanner;
+import java.util.Scanner;
 
-    public class Main {
+public class Main {
 
-        // Metoda do sprawdzania czy dwa ciągi znaków są anagramami
-        public static boolean czyAnagram(String pierwszy, String drugi) {
-            // Sprawdzenie czy długości obu ciągów są takie same
-            if (pierwszy.length() != drugi.length()) {
-                return false;
-            }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-            // Konwersja ciągów na tablice znaków i sortowanie ich
-            char[] pierwszyTablica = pierwszy.toCharArray();
-            char[] drugiTablica = drugi.toCharArray();
-            Arrays.sort(pierwszyTablica);
-            Arrays.sort(drugiTablica);
+        // Pobieranie równania od użytkownika
+        System.out.print("Podaj równanie w postaci 'ax + b = c': ");
+        String rownanie = scanner.nextLine();
 
-            // Porównanie posortowanych tablic znaków
-            return Arrays.equals(pierwszyTablica, drugiTablica);
+        // Usunięcie białych znaków z równania
+        rownanie = rownanie.replaceAll("\\s", "");
+
+        // Sprawdzanie, czy równanie jest liniowe
+        boolean czyLiniowe = czyRownanieLiniowe(rownanie);
+
+        // Wyświetlanie wyniku
+        if (czyLiniowe) {
+            System.out.println("Podane równanie jest równaniem liniowym.");
+        } else {
+            System.out.println("Podane równanie nie jest równaniem liniowym.");
         }
 
-        public static void main(String[] args) {
-            Scanner scanner = new Scanner(System.in);
-
-            // Pobieranie dwóch ciągów od użytkownika
-            System.out.print("Podaj pierwszy ciąg: ");
-            String pierwszy = scanner.nextLine();
-
-            System.out.print("Podaj drugi ciąg: ");
-            String drugi = scanner.nextLine();
-
-            // Sprawdzanie czy ciągi są anagramami
-            if (czyAnagram(pierwszy, drugi)) {
-                System.out.println("Podane ciągi są anagramami.");
-            } else {
-                System.out.println("Podane ciągi nie są anagramami.");
-            }
-
-            scanner.close();
-        }
+        scanner.close();
     }
+
+    // Metoda do sprawdzania czy równanie jest równaniem liniowym
+    public static boolean czyRownanieLiniowe(String rownanie) {
+        // Sprawdzenie czy równanie zawiera 'x'
+        if (!rownanie.contains("x")) {
+            return false;
+        }
+
+        // Podział równania na lewą i prawą stronę
+        String[] strony = rownanie.split("=");
+
+        // Sprawdzenie, czy obie strony zawierają 'x'
+        if (strony.length != 2 || strony[0].indexOf('x') == -1 || strony[1].indexOf('x') == -1) {
+            return false;
+        }
+
+        // Podział lewej strony na 'ax' i 'b'
+        String[] lewaStrona = strony[0].split("x");
+
+        // Sprawdzenie czy 'ax' jest liczbą
+        try {
+            Double.parseDouble(lewaStrona[0]);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        // Sprawdzenie czy 'b' jest liczbą
+        try {
+            Double.parseDouble(lewaStrona[1]);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return true;
+    }
+}
