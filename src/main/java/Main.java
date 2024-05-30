@@ -1,41 +1,21 @@
-import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        // Pierwsza tablica
+        int[] tablica1 = {1, 2, 3, 4, 5};
 
-        // Pobieranie wymiarów macierzy od użytkownika
-        System.out.print("Podaj liczbę wierszy macierzy: ");
-        int wiersze = scanner.nextInt();
+        // Tworzenie drugiej tablicy o tej samej wielkości co pierwsza
+        int[] tablica2 = new int[tablica1.length];
 
-        System.out.print("Podaj liczbę kolumn macierzy: ");
-        int kolumny = scanner.nextInt();
-
-        // Tworzenie macierzy
-        int[][] macierz = new int[wiersze][kolumny];
-
-        // Pobieranie elementów macierzy od użytkownika
-        System.out.println("Podaj elementy macierzy:");
-
-        for (int i = 0; i < wiersze; i++) {
-            for (int j = 0; j < kolumny; j++) {
-                System.out.print("Podaj element [" + i + "][" + j + "]: ");
-                macierz[i][j] = scanner.nextInt();
-            }
+        // Kopiowanie elementów z pierwszej do drugiej tablicy
+        for (int i = 0; i < tablica1.length; i++) {
+            tablica2[i] = tablica1[i];
         }
 
-        // Obliczanie sumy elementów macierzy
-        int suma = 0;
-        for (int i = 0; i < wiersze; i++) {
-            for (int j = 0; j < kolumny; j++) {
-                suma += macierz[i][j];
-            }
-        }
-
-        // Wyświetlanie sumy elementów macierzy
-        System.out.println("Suma elementów macierzy: " + suma);
-
-        scanner.close();
+        // Wyświetlanie obu tablic
+        System.out.println("Pierwsza tablica: " + Arrays.toString(tablica1));
+        System.out.println("Druga tablica: " + Arrays.toString(tablica2));
     }
 }
