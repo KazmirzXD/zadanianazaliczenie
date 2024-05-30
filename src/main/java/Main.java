@@ -1,35 +1,42 @@
-import java.util.Scanner;
+    import java.util.Arrays;
+    import java.util.Scanner;
 
-public class Main {
+    public class Main {
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // Pobieranie ciągu znaków od użytkownika
-        System.out.print("Podaj ciąg znaków: ");
-        String ciag = scanner.nextLine();
-
-        // Zliczanie znaków interpunkcyjnych
-        int liczbaZnakowInterpunkcyjnych = 0;
-        for (int i = 0; i < ciag.length(); i++) {
-            char znak = ciag.charAt(i);
-            if (Character.isLetterOrDigit(znak)) {
-                continue; // Pomijamy litery i cyfry
+        // Metoda do sprawdzania czy dwa ciągi znaków są anagramami
+        public static boolean czyAnagram(String pierwszy, String drugi) {
+            // Sprawdzenie czy długości obu ciągów są takie same
+            if (pierwszy.length() != drugi.length()) {
+                return false;
             }
-            // Sprawdzamy, czy znak jest znakiem interpunkcyjnym
-            if (znak == '!' || znak == '"' || znak == '#' || znak == '$' || znak == '%' || znak == '&' ||
-                znak == '\'' || znak == '(' || znak == ')' || znak == '*' || znak == '+' || znak == ',' ||
-                znak == '-' || znak == '.' || znak == '/' || znak == ':' || znak == ';' || znak == '<' ||
-                znak == '=' || znak == '>' || znak == '?' || znak == '@' || znak == '[' || znak == '\\' ||
-                znak == ']' || znak == '^' || znak == '_' || znak == '`' || znak == '{' || znak == '|' ||
-                znak == '}' || znak == '~') {
-                liczbaZnakowInterpunkcyjnych++;
-            }
+
+            // Konwersja ciągów na tablice znaków i sortowanie ich
+            char[] pierwszyTablica = pierwszy.toCharArray();
+            char[] drugiTablica = drugi.toCharArray();
+            Arrays.sort(pierwszyTablica);
+            Arrays.sort(drugiTablica);
+
+            // Porównanie posortowanych tablic znaków
+            return Arrays.equals(pierwszyTablica, drugiTablica);
         }
 
-        // Wyświetlanie liczby znaków interpunkcyjnych
-        System.out.println("Liczba znaków interpunkcyjnych w podanym ciągu: " + liczbaZnakowInterpunkcyjnych);
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
 
-        scanner.close();
+            // Pobieranie dwóch ciągów od użytkownika
+            System.out.print("Podaj pierwszy ciąg: ");
+            String pierwszy = scanner.nextLine();
+
+            System.out.print("Podaj drugi ciąg: ");
+            String drugi = scanner.nextLine();
+
+            // Sprawdzanie czy ciągi są anagramami
+            if (czyAnagram(pierwszy, drugi)) {
+                System.out.println("Podane ciągi są anagramami.");
+            } else {
+                System.out.println("Podane ciągi nie są anagramami.");
+            }
+
+            scanner.close();
+        }
     }
-}
