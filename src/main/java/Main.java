@@ -2,37 +2,34 @@ import java.util.Scanner;
 
 public class Main {
 
-    // Metoda obliczająca silnię w sposób iteracyjny
-    public static long silniaIteracyjnie(int n) {
-        long wynik = 1;
-        for (int i = 1; i <= n; i++) {
-            wynik *= i;
+    // Metoda obliczająca NWD za pomocą algorytmu Euklidesa
+    public static int nwd(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
         }
-        return wynik;
+        return a;
     }
 
-    // Metoda obliczająca silnię w sposób rekurencyjny
-    public static long silniaRekurencyjnie(int n) {
-        if (n == 0) {
-            return 1;
-        }
-        return n * silniaRekurencyjnie(n - 1);
+    // Metoda obliczająca NWW dwóch liczb
+    public static int nww(int a, int b) {
+        return Math.abs(a * b) / nwd(a, b);
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Pobieranie liczby od użytkownika
-        System.out.print("Podaj liczbę do obliczenia silni: ");
-        int liczba = scanner.nextInt();
+        // Pobieranie dwóch liczb od użytkownika
+        System.out.print("Podaj pierwszą liczbę: ");
+        int liczba1 = scanner.nextInt();
 
-        // Obliczanie silni w sposób iteracyjny
-        long wynikIteracyjny = silniaIteracyjnie(liczba);
-        System.out.println("Silnia (iteracyjnie) z " + liczba + " wynosi: " + wynikIteracyjny);
+        System.out.print("Podaj drugą liczbę: ");
+        int liczba2 = scanner.nextInt();
 
-        // Obliczanie silni w sposób rekurencyjny
-        long wynikRekurencyjny = silniaRekurencyjnie(liczba);
-        System.out.println("Silnia (rekurencyjnie) z " + liczba + " wynosi: " + wynikRekurencyjny);
+        // Obliczanie NWW
+        int wynik = nww(liczba1, liczba2);
+        System.out.println("Największa Wspólna Wielokrotność (NWW) " + liczba1 + " i " + liczba2 + " wynosi: " + wynik);
 
         scanner.close();
     }
