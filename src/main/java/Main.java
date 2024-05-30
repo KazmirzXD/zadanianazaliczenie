@@ -2,34 +2,21 @@ import java.util.Scanner;
 
 public class Main {
 
-    // Metoda obliczająca NWD za pomocą algorytmu Euklidesa
-    public static int nwd(int a, int b) {
-        while (b != 0) {
-            int temp = b;
-            b = a % b;
-            a = temp;
-        }
-        return a;
-    }
-
-    // Metoda obliczająca NWW dwóch liczb
-    public static int nww(int a, int b) {
-        return Math.abs(a * b) / nwd(a, b);
+    // Metoda przeliczająca prędkość z m/s na km/h
+    public static double przeliczPredkosc(double predkoscMs) {
+        return predkoscMs * 3.6;
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Pobieranie dwóch liczb od użytkownika
-        System.out.print("Podaj pierwszą liczbę: ");
-        int liczba1 = scanner.nextInt();
+        // Pobieranie prędkości od użytkownika w m/s
+        System.out.print("Podaj prędkość w metrach na sekundę (m/s): ");
+        double predkoscMs = scanner.nextDouble();
 
-        System.out.print("Podaj drugą liczbę: ");
-        int liczba2 = scanner.nextInt();
-
-        // Obliczanie NWW
-        int wynik = nww(liczba1, liczba2);
-        System.out.println("Największa Wspólna Wielokrotność (NWW) " + liczba1 + " i " + liczba2 + " wynosi: " + wynik);
+        // Przeliczanie prędkości na km/h
+        double predkoscKmh = przeliczPredkosc(predkoscMs);
+        System.out.println("Prędkość w kilometrach na godzinę (km/h) wynosi: " + predkoscKmh);
 
         scanner.close();
     }
