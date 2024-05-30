@@ -1,26 +1,23 @@
+import java.util.Scanner;
+
 public class Main {
 
-    // Metoda sprawdzająca, czy liczba jest pierwsza
-    public static boolean czyLiczbaPierwsza(int n) {
-        if (n <= 1) {
-            return false;
-        }
-        for (int i = 2; i <= Math.sqrt(n); i++) {
-            if (n % i == 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public static void main(String[] args) {
-        System.out.println("Liczby pierwsze z zakresu 1-500:");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Podaj liczbę: ");
 
-        // Iteracja przez liczby od 2 do 500
-        for (int liczba = 2; liczba <= 500; liczba++) {
-            if (czyLiczbaPierwsza(liczba)) {
-                System.out.print(liczba + " ");
-            }
+        // Wczytanie liczby od użytkownika
+        double liczba = scanner.nextDouble();
+
+        // Sprawdzenie, czy liczba jest dodatnia, ujemna czy zero
+        if (liczba > 0) {
+            System.out.println("Liczba jest dodatnia.");
+        } else if (liczba < 0) {
+            System.out.println("Liczba jest ujemna.");
+        } else {
+            System.out.println("Liczba jest zerem.");
         }
+
+        scanner.close();
     }
 }
