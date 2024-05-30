@@ -5,15 +5,36 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Pobieranie łańcucha znaków od użytkownika
-        System.out.print("Podaj łańcuch znaków: ");
-        String lancuch = scanner.nextLine();
+        // Pobieranie wymiarów macierzy od użytkownika
+        System.out.print("Podaj liczbę wierszy macierzy: ");
+        int wiersze = scanner.nextInt();
 
-        // Obliczanie długości łańcucha
-        int dlugosc = lancuch.length();
+        System.out.print("Podaj liczbę kolumn macierzy: ");
+        int kolumny = scanner.nextInt();
 
-        // Wyświetlanie długości łańcucha
-        System.out.println("Długość podanego łańcucha: " + dlugosc);
+        // Tworzenie macierzy
+        int[][] macierz = new int[wiersze][kolumny];
+
+        // Pobieranie elementów macierzy od użytkownika
+        System.out.println("Podaj elementy macierzy:");
+
+        for (int i = 0; i < wiersze; i++) {
+            for (int j = 0; j < kolumny; j++) {
+                System.out.print("Podaj element [" + i + "][" + j + "]: ");
+                macierz[i][j] = scanner.nextInt();
+            }
+        }
+
+        // Obliczanie sumy elementów macierzy
+        int suma = 0;
+        for (int i = 0; i < wiersze; i++) {
+            for (int j = 0; j < kolumny; j++) {
+                suma += macierz[i][j];
+            }
+        }
+
+        // Wyświetlanie sumy elementów macierzy
+        System.out.println("Suma elementów macierzy: " + suma);
 
         scanner.close();
     }
