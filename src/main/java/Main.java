@@ -1,29 +1,26 @@
-import java.util.Scanner;
 public class Main {
+
+    // Metoda sprawdzająca, czy liczba jest pierwsza
+    public static boolean czyLiczbaPierwsza(int n) {
+        if (n <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int[] numbers = new int[5]; // Array to store the 5 numbers
-        int sum = 0;
-        double average;
+        System.out.println("Liczby pierwsze z zakresu 1-500:");
 
-        // Input: Get 5 numbers from the user
-        System.out.println("Podaj 5 liczb:");
-        for (int i = 0; i < 5; i++) {
-            numbers[i] = scanner.nextInt();
+        // Iteracja przez liczby od 2 do 500
+        for (int liczba = 2; liczba <= 500; liczba++) {
+            if (czyLiczbaPierwsza(liczba)) {
+                System.out.print(liczba + " ");
+            }
         }
-
-        // Calculate sum
-        for (int number : numbers) {
-            sum += number;
-        }
-
-        // Calculate average
-        average = (double) sum / numbers.length;
-
-        // Output: Display the sum and average
-        System.out.println("Suma liczb: " + sum);
-        System.out.println("Średnia liczb: " + average);
-
-        scanner.close(); // Close the scanner to avoid resource leaks
     }
 }
