@@ -1,27 +1,34 @@
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Liczby Armstronga od 1 do 600:");
+        Scanner scanner = new Scanner(System.in);
 
-        for (int i = 1; i <= 600; i++) {
-            if (czyLiczbaArmstronga(i)) {
-                System.out.println(i);
-            }
-        }
-    }
+        // Pobieranie trzech liczb od użytkownika
+        System.out.print("Podaj pierwszą liczbę: ");
+        int liczba1 = scanner.nextInt();
 
-    // Metoda do sprawdzania czy liczba jest liczbą Armstronga
-    public static boolean czyLiczbaArmstronga(int liczba) {
-        int sumaPoteg = 0;
-        int temp = liczba;
-        int liczbaCyfr = String.valueOf(liczba).length();
+        System.out.print("Podaj drugą liczbę: ");
+        int liczba2 = scanner.nextInt();
 
-        while (temp != 0) {
-            int cyfra = temp % 10;
-            sumaPoteg += Math.pow(cyfra, liczbaCyfr);
-            temp /= 10;
+        System.out.print("Podaj trzecią liczbę: ");
+        int liczba3 = scanner.nextInt();
+
+        // Znajdowanie najmniejszej liczby
+        int najmniejsza = liczba1;
+
+        if (liczba2 < najmniejsza) {
+            najmniejsza = liczba2;
         }
 
-        return sumaPoteg == liczba;
+        if (liczba3 < najmniejsza) {
+            najmniejsza = liczba3;
+        }
+
+        // Wyświetlanie najmniejszej liczby
+        System.out.println("Najmniejsza liczba spośród podanych to: " + najmniejsza);
+
+        scanner.close();
     }
 }
