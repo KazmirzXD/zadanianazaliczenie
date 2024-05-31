@@ -1,41 +1,32 @@
-//-Napisz program, który usunie trzeci element z tablic znakowej.
-
-import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        // Inicjalizacja tablicy znakowej
-        char[] tablica = {'a', 'b', 'c', 'd', 'e'};
+        Scanner scanner = new Scanner(System.in);
 
-        // Wyświetlanie oryginalnej tablicy
-        System.out.println("Oryginalna tablica: " + Arrays.toString(tablica));
+        // Pobieranie ciągu znaków od użytkownika
+        System.out.print("Podaj ciąg znaków: ");
+        String ciag = scanner.nextLine();
 
-        // Usuwanie trzeciego elementu (indeks 2)
-        tablica = usunTrzeciElement(tablica);
+        // Zliczanie liczby słów
+        int liczbaSlow = zliczLiczbeSlow(ciag);
 
-        // Wyświetlanie tablicy po usunięciu trzeciego elementu
-        System.out.println("Tablica po usunięciu trzeciego elementu: " + Arrays.toString(tablica));
+        // Wyświetlanie liczby słów
+        System.out.println("Liczba słów w podanym ciągu: " + liczbaSlow);
+
+        scanner.close();
     }
 
-    // Metoda do usuwania trzeciego elementu z tablicy
-    public static char[] usunTrzeciElement(char[] tablica) {
-        // Sprawdzenie, czy tablica ma co najmniej trzy elementy
-        if (tablica.length < 3) {
-            System.out.println("Tablica nie ma co najmniej trzech elementów.");
-            return tablica;
+    // Metoda do zliczania liczby słów w ciągu znaków
+    public static int zliczLiczbeSlow(String ciag) {
+        if (ciag == null || ciag.isEmpty()) {
+            return 0;
         }
 
-        // Tworzenie nowej tablicy o rozmiarze mniejszym o 1
-        char[] nowaTablica = new char[tablica.length - 1];
+        // Podział ciągu na słowa za pomocą spacji jako separatora
+        String[] slowa = ciag.trim().split("\\s+");
 
-        // Kopiowanie elementów z wyjątkiem trzeciego
-        for (int i = 0, j = 0; i < tablica.length; i++) {
-            if (i != 2) {
-                nowaTablica[j++] = tablica[i];
-            }
-        }
-
-        return nowaTablica;
+        return slowa.length;
     }
 }
