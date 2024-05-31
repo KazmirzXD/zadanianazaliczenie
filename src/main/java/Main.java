@@ -7,21 +7,27 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         // Pobieranie danych wejściowych od użytkownika
-        System.out.println("Podaj łańcuch znaków:");
-        String lancuch = scanner.nextLine();
+        System.out.println("Podaj liczbę:");
+        String input = scanner.nextLine();
 
-        // Usuwanie wszystkich spacji z łańcucha
-        String bezSpacji = usunSpacje(lancuch);
-
-        // Wyświetlanie wyniku
-        System.out.println("Łańcuch bez spacji: " + bezSpacji);
+        // Sprawdzanie, czy podana wartość jest liczbą całkowitą
+        if (czyLiczbaCalkowita(input)) {
+            System.out.println("Podana wartość jest liczbą całkowitą.");
+        } else {
+            System.out.println("Podana wartość nie jest liczbą całkowitą.");
+        }
 
         // Zamknięcie skanera
         scanner.close();
     }
 
-    // Metoda do usuwania wszystkich spacji z łańcucha znaków
-    public static String usunSpacje(String lancuch) {
-        return lancuch.replace(" ", "");
+    // Metoda do sprawdzania, czy podana wartość jest liczbą całkowitą
+    public static boolean czyLiczbaCalkowita(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
