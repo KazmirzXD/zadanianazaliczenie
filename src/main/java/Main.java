@@ -1,34 +1,41 @@
-import java.util.Scanner;
+//-Napisz program, który usunie trzeci element z tablic znakowej.
+
+import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        // Inicjalizacja tablicy znakowej
+        char[] tablica = {'a', 'b', 'c', 'd', 'e'};
 
-        // Pobieranie trzech liczb od użytkownika
-        System.out.print("Podaj pierwszą liczbę: ");
-        int liczba1 = scanner.nextInt();
+        // Wyświetlanie oryginalnej tablicy
+        System.out.println("Oryginalna tablica: " + Arrays.toString(tablica));
 
-        System.out.print("Podaj drugą liczbę: ");
-        int liczba2 = scanner.nextInt();
+        // Usuwanie trzeciego elementu (indeks 2)
+        tablica = usunTrzeciElement(tablica);
 
-        System.out.print("Podaj trzecią liczbę: ");
-        int liczba3 = scanner.nextInt();
+        // Wyświetlanie tablicy po usunięciu trzeciego elementu
+        System.out.println("Tablica po usunięciu trzeciego elementu: " + Arrays.toString(tablica));
+    }
 
-        // Znajdowanie najmniejszej liczby
-        int najmniejsza = liczba1;
-
-        if (liczba2 < najmniejsza) {
-            najmniejsza = liczba2;
+    // Metoda do usuwania trzeciego elementu z tablicy
+    public static char[] usunTrzeciElement(char[] tablica) {
+        // Sprawdzenie, czy tablica ma co najmniej trzy elementy
+        if (tablica.length < 3) {
+            System.out.println("Tablica nie ma co najmniej trzech elementów.");
+            return tablica;
         }
 
-        if (liczba3 < najmniejsza) {
-            najmniejsza = liczba3;
+        // Tworzenie nowej tablicy o rozmiarze mniejszym o 1
+        char[] nowaTablica = new char[tablica.length - 1];
+
+        // Kopiowanie elementów z wyjątkiem trzeciego
+        for (int i = 0, j = 0; i < tablica.length; i++) {
+            if (i != 2) {
+                nowaTablica[j++] = tablica[i];
+            }
         }
 
-        // Wyświetlanie najmniejszej liczby
-        System.out.println("Najmniejsza liczba spośród podanych to: " + najmniejsza);
-
-        scanner.close();
+        return nowaTablica;
     }
 }
