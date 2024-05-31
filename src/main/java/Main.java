@@ -9,27 +9,31 @@ public class Main {
         // Wyświetlanie oryginalnej tablicy
         System.out.println("Oryginalna tablica: " + Arrays.toString(tablica));
 
-        // Znajdowanie liczby parzystych i nieparzystych liczb
-        int[] wynik = policzParzysteINieparzyste(tablica);
+        // Obliczanie różnicy między największą a najmniejszą wartością
+        int roznica = znajdzRoznice(tablica);
 
-        // Wyświetlanie wyników
-        System.out.println("Liczba parzystych liczb: " + wynik[0]);
-        System.out.println("Liczba nieparzystych liczb: " + wynik[1]);
+        // Wyświetlanie wyniku
+        System.out.println("Różnica między największą a najmniejszą wartością: " + roznica);
     }
 
-    // Metoda do liczenia parzystych i nieparzystych liczb w tablicy liczb całkowitych
-    public static int[] policzParzysteINieparzyste(int[] tablica) {
-        int liczbaParzystych = 0;
-        int liczbaNieparzystych = 0;
+    // Metoda do obliczania różnicy między największą i najmniejszą wartością w tablicy
+    public static int znajdzRoznice(int[] tablica) {
+        if (tablica == null || tablica.length == 0) {
+            throw new IllegalArgumentException("Tablica nie może być pusta.");
+        }
+
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
 
         for (int num : tablica) {
-            if (num % 2 == 0) {
-                liczbaParzystych++;
-            } else {
-                liczbaNieparzystych++;
+            if (num < min) {
+                min = num;
+            }
+            if (num > max) {
+                max = num;
             }
         }
 
-        return new int[] {liczbaParzystych, liczbaNieparzystych};
+        return max - min;
     }
 }
