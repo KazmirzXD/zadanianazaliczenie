@@ -9,37 +9,27 @@ public class Main {
         // Wyświetlanie oryginalnej tablicy
         System.out.println("Oryginalna tablica: " + Arrays.toString(tablica));
 
-        // Znajdowanie drugiej najniższej liczby
-        try {
-            int drugaNajniższa = znajdzDrugaNajnisza(tablica);
-            System.out.println("Druga najniższa liczba w tablicy to: " + drugaNajniższa);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        // Znajdowanie liczby parzystych i nieparzystych liczb
+        int[] wynik = policzParzysteINieparzyste(tablica);
+
+        // Wyświetlanie wyników
+        System.out.println("Liczba parzystych liczb: " + wynik[0]);
+        System.out.println("Liczba nieparzystych liczb: " + wynik[1]);
     }
 
-    // Metoda do znajdowania drugiej najniższej liczby w tablicy liczb całkowitych
-    public static int znajdzDrugaNajnisza(int[] tablica) {
-        if (tablica.length < 2) {
-            throw new IllegalArgumentException("Tablica musi zawierać co najmniej dwa elementy.");
-        }
-
-        int najnizsza = Integer.MAX_VALUE;
-        int drugaNajnisza = Integer.MAX_VALUE;
+    // Metoda do liczenia parzystych i nieparzystych liczb w tablicy liczb całkowitych
+    public static int[] policzParzysteINieparzyste(int[] tablica) {
+        int liczbaParzystych = 0;
+        int liczbaNieparzystych = 0;
 
         for (int num : tablica) {
-            if (num < najnizsza) {
-                drugaNajnisza = najnizsza;
-                najnizsza = num;
-            } else if (num < drugaNajnisza && num != najnizsza) {
-                drugaNajnisza = num;
+            if (num % 2 == 0) {
+                liczbaParzystych++;
+            } else {
+                liczbaNieparzystych++;
             }
         }
 
-        if (drugaNajnisza == Integer.MAX_VALUE) {
-            throw new IllegalArgumentException("Tablica nie zawiera drugiej najniższej liczby.");
-        }
-
-        return drugaNajnisza;
+        return new int[] {liczbaParzystych, liczbaNieparzystych};
     }
 }
