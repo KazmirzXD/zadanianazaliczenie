@@ -1,33 +1,28 @@
-import java.util.Scanner;
+    import java.util.Scanner;
 
-public class Main {
+    public class Main {
 
-    public static void main(String[] args) {
-        // Inicjalizacja skanera do odczytu danych wejściowych od użytkownika
-        Scanner scanner = new Scanner(System.in);
+        public static void main(String[] args) {
+            // Inicjalizacja skanera do odczytu danych wejściowych od użytkownika
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Wprowadzaj znaki (wprowadzenie 'k' kończy program):");
 
-        // Pobieranie danych wejściowych od użytkownika
-        System.out.println("Podaj liczbę:");
-        String input = scanner.nextLine();
+            // Pętla do wczytywania i wyświetlania znaków
+            while (true) {
+                // Odczyt pojedynczego znaku
+                char znak = scanner.next().charAt(0);
 
-        // Sprawdzanie, czy podana wartość jest liczbą całkowitą
-        if (czyLiczbaCalkowita(input)) {
-            System.out.println("Podana wartość jest liczbą całkowitą.");
-        } else {
-            System.out.println("Podana wartość nie jest liczbą całkowitą.");
-        }
+                // Sprawdzanie, czy wprowadzono 'k'
+                if (znak == 'k') {
+                    break;
+                }
 
-        // Zamknięcie skanera
-        scanner.close();
-    }
+                // Wyświetlanie wprowadzonego znaku
+                System.out.println("Wprowadzony znak: " + znak);
+            }
 
-    // Metoda do sprawdzania, czy podana wartość jest liczbą całkowitą
-    public static boolean czyLiczbaCalkowita(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+            // Zamknięcie skanera
+            scanner.close();
+            System.out.println("Program zakończony.");
         }
     }
-}
