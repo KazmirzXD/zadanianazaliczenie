@@ -7,29 +7,21 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         // Pobieranie danych wejściowych od użytkownika
-        System.out.println("Podaj liczbę całkowitą:");
-        int liczba = scanner.nextInt();
+        System.out.println("Podaj łańcuch znaków:");
+        String lancuch = scanner.nextLine();
 
-        // Odwracanie kolejności cyfr w liczbie
-        int odwroconaLiczba = odwrocLiczbe(liczba);
+        // Usuwanie wszystkich spacji z łańcucha
+        String bezSpacji = usunSpacje(lancuch);
 
-        // Wyświetlanie odwróconej liczby
-        System.out.println("Liczba z odwróconą kolejnością cyfr: " + odwroconaLiczba);
+        // Wyświetlanie wyniku
+        System.out.println("Łańcuch bez spacji: " + bezSpacji);
 
         // Zamknięcie skanera
         scanner.close();
     }
 
-    // Metoda do odwracania kolejności cyfr w liczbie
-    public static int odwrocLiczbe(int liczba) {
-        int odwrocona = 0;
-
-        while (liczba != 0) {
-            int cyfra = liczba % 10;
-            odwrocona = odwrocona * 10 + cyfra;
-            liczba /= 10;
-        }
-
-        return odwrocona;
+    // Metoda do usuwania wszystkich spacji z łańcucha znaków
+    public static String usunSpacje(String lancuch) {
+        return lancuch.replace(" ", "");
     }
 }
