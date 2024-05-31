@@ -1,33 +1,41 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Pobieranie liczby całkowitej od użytkownika
-        System.out.print("Podaj liczbę całkowitą: ");
-        int liczba = scanner.nextInt();
+        // Inicjalizacja tablicy znakowej
+        char[] tablica = {'a', 'b', 'c', 'd', 'e'};
 
-        // Obliczanie sumy cyfr
-        int sumaCyfr = obliczSumeCyfr(liczba);
+        // Wyświetlanie oryginalnej tablicy
+        System.out.println("Oryginalna tablica: " + Arrays.toString(tablica));
 
-        // Wyświetlanie sumy cyfr
-        System.out.println("Suma cyfr w podanej liczbie: " + sumaCyfr);
+        // Pobieranie indeksów od użytkownika
+        System.out.print("Podaj indeks pierwszego elementu do zamiany: ");
+        int indeks1 = scanner.nextInt();
+        System.out.print("Podaj indeks drugiego elementu do zamiany: ");
+        int indeks2 = scanner.nextInt();
+
+        // Sprawdzanie, czy podane indeksy są poprawne
+        if (indeks1 >= 0 && indeks1 < tablica.length && indeks2 >= 0 && indeks2 < tablica.length) {
+            // Zamiana elementów w tablicy
+            zamienElementy(tablica, indeks1, indeks2);
+
+            // Wyświetlanie tablicy po zamianie elementów
+            System.out.println("Tablica po zamianie elementów: " + Arrays.toString(tablica));
+        } else {
+            System.out.println("Podane indeksy są niepoprawne.");
+        }
 
         scanner.close();
     }
 
-    // Metoda do obliczania sumy cyfr w liczbie całkowitej
-    public static int obliczSumeCyfr(int liczba) {
-        int suma = 0;
-        liczba = Math.abs(liczba);  // obsługa liczb ujemnych
-
-        while (liczba != 0) {
-            suma += liczba % 10;  // dodawanie ostatniej cyfry do sumy
-            liczba /= 10;  // usuwanie ostatniej cyfry
-        }
-
-        return suma;
+    // Metoda do zamiany dwóch elementów w tablicy znakowej
+    public static void zamienElementy(char[] tablica, int indeks1, int indeks2) {
+        char temp = tablica[indeks1];
+        tablica[indeks1] = tablica[indeks2];
+        tablica[indeks2] = temp;
     }
 }
