@@ -1,38 +1,35 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        // Inicjalizacja tablicy liczb całkowitych
-        int[] tablica = {1, 2, 3, 4, 5, 2, 6, 7, 8, 3, 9, 1};
+        // Inicjalizacja skanera do odczytu danych wejściowych od użytkownika
+        Scanner scanner = new Scanner(System.in);
 
-        // Wyświetlanie oryginalnej tablicy
-        System.out.println("Oryginalna tablica: ");
-        for (int num : tablica) {
-            System.out.print(num + " ");
+        // Pobieranie danych wejściowych od użytkownika
+        System.out.println("Podaj znak:");
+        char znak = scanner.next().toLowerCase().charAt(0);
+
+        // Sprawdzanie, czy znak jest samogłoską czy spółgłoską
+        if (czySamogloska(znak)) {
+            System.out.println("Podany znak to samogłoska.");
+        } else if (czySpolgloska(znak)) {
+            System.out.println("Podany znak to spółgłoska.");
+        } else {
+            System.out.println("Podany znak nie jest ani samogłoską, ani spółgłoską.");
         }
-        System.out.println();
 
-        // Znajdowanie zduplikowanych wartości
-        Set<Integer> zduplikowaneWartosci = znajdzZduplikowaneWartosci(tablica);
-
-        // Wyświetlanie zduplikowanych wartości
-        System.out.println("Zduplikowane wartości: " + zduplikowaneWartosci);
+        // Zamknięcie skanera
+        scanner.close();
     }
 
-    // Metoda do znajdowania zduplikowanych wartości w tablicy liczb całkowitych
-    public static Set<Integer> znajdzZduplikowaneWartosci(int[] tablica) {
-        Set<Integer> wszystkieWartosci = new HashSet<>();
-        Set<Integer> zduplikowaneWartosci = new HashSet<>();
+    // Metoda sprawdzająca, czy znak jest samogłoską
+    public static boolean czySamogloska(char znak) {
+        return "aeiouy".indexOf(znak) != -1;
+    }
 
-        for (int num : tablica) {
-            // Jeśli wartość jest już w zbiorze wszystkieWartosci, dodaj ją do zbioru zduplikowaneWartosci
-            if (!wszystkieWartosci.add(num)) {
-                zduplikowaneWartosci.add(num);
-            }
-        }
-
-        return zduplikowaneWartosci;
+    // Metoda sprawdzająca, czy znak jest spółgłoską
+    public static boolean czySpolgloska(char znak) {
+        return "bcdfghjklmnpqrstvwxyz".indexOf(znak) != -1;
     }
 }
