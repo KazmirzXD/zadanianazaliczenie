@@ -1,35 +1,45 @@
-import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) {
-        // Inicjalizacja skanera do odczytu danych wejściowych od użytkownika
-        Scanner scanner = new Scanner(System.in);
+        // Inicjalizacja tablicy liczb całkowitych
+        int[] tablica = {5, 3, 8, 4, 2, 7, 1, 6};
 
-        // Pobieranie danych wejściowych od użytkownika
-        System.out.println("Podaj znak:");
-        char znak = scanner.next().toLowerCase().charAt(0);
+        // Wyświetlanie oryginalnej tablicy
+        System.out.println("Oryginalna tablica: " + Arrays.toString(tablica));
 
-        // Sprawdzanie, czy znak jest samogłoską czy spółgłoską
-        if (czySamogloska(znak)) {
-            System.out.println("Podany znak to samogłoska.");
-        } else if (czySpolgloska(znak)) {
-            System.out.println("Podany znak to spółgłoska.");
-        } else {
-            System.out.println("Podany znak nie jest ani samogłoską, ani spółgłoską.");
+        // Znajdowanie drugiej najniższej liczby
+        try {
+            int drugaNajniższa = znajdzDrugaNajnisza(tablica);
+            System.out.println("Druga najniższa liczba w tablicy to: " + drugaNajniższa);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    // Metoda do znajdowania drugiej najniższej liczby w tablicy liczb całkowitych
+    public static int znajdzDrugaNajnisza(int[] tablica) {
+        if (tablica.length < 2) {
+            throw new IllegalArgumentException("Tablica musi zawierać co najmniej dwa elementy.");
         }
 
-        // Zamknięcie skanera
-        scanner.close();
-    }
+        int najnizsza = Integer.MAX_VALUE;
+        int drugaNajnisza = Integer.MAX_VALUE;
 
-    // Metoda sprawdzająca, czy znak jest samogłoską
-    public static boolean czySamogloska(char znak) {
-        return "aeiouy".indexOf(znak) != -1;
-    }
+        for (int num : tablica) {
+            if (num < najnizsza) {
+                drugaNajnisza = najnizsza;
+                najnizsza = num;
+            } else if (num < drugaNajnisza && num != najnizsza) {
+                drugaNajnisza = num;
+            }
+        }
 
-    // Metoda sprawdzająca, czy znak jest spółgłoską
-    public static boolean czySpolgloska(char znak) {
-        return "bcdfghjklmnpqrstvwxyz".indexOf(znak) != -1;
+        if (drugaNajnisza == Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("Tablica nie zawiera drugiej najniższej liczby.");
+        }
+
+        return drugaNajnisza;
     }
 }
