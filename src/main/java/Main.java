@@ -1,39 +1,35 @@
-import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        // Inicjalizacja tablicy liczb całkowitych
-        int[] tablica = {5, 3, 8, 4, 2, 7, 1, 6};
+        // Inicjalizacja skanera do odczytu danych wejściowych od użytkownika
+        Scanner scanner = new Scanner(System.in);
 
-        // Wyświetlanie oryginalnej tablicy
-        System.out.println("Oryginalna tablica: " + Arrays.toString(tablica));
+        // Pobieranie danych wejściowych od użytkownika
+        System.out.println("Podaj liczbę całkowitą:");
+        int liczba = scanner.nextInt();
 
-        // Obliczanie różnicy między największą a najmniejszą wartością
-        int roznica = znajdzRoznice(tablica);
+        // Odwracanie kolejności cyfr w liczbie
+        int odwroconaLiczba = odwrocLiczbe(liczba);
 
-        // Wyświetlanie wyniku
-        System.out.println("Różnica między największą a najmniejszą wartością: " + roznica);
+        // Wyświetlanie odwróconej liczby
+        System.out.println("Liczba z odwróconą kolejnością cyfr: " + odwroconaLiczba);
+
+        // Zamknięcie skanera
+        scanner.close();
     }
 
-    // Metoda do obliczania różnicy między największą i najmniejszą wartością w tablicy
-    public static int znajdzRoznice(int[] tablica) {
-        if (tablica == null || tablica.length == 0) {
-            throw new IllegalArgumentException("Tablica nie może być pusta.");
+    // Metoda do odwracania kolejności cyfr w liczbie
+    public static int odwrocLiczbe(int liczba) {
+        int odwrocona = 0;
+
+        while (liczba != 0) {
+            int cyfra = liczba % 10;
+            odwrocona = odwrocona * 10 + cyfra;
+            liczba /= 10;
         }
 
-        int min = Integer.MAX_VALUE;
-        int max = Integer.MIN_VALUE;
-
-        for (int num : tablica) {
-            if (num < min) {
-                min = num;
-            }
-            if (num > max) {
-                max = num;
-            }
-        }
-
-        return max - min;
+        return odwrocona;
     }
 }
